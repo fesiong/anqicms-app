@@ -18,6 +18,10 @@ export default class AboutPage extends Component {
   }
 
   componentDidMount() {
+    Taro.showShareMenu({
+      withShareTicket: true,
+      showShareItems: ['shareAppMessage','shareTimeline']
+    });
     getPageDetail({
       filename: "about",
     }).then(res => {
@@ -53,6 +57,19 @@ export default class AboutPage extends Component {
         title: '获取页面信息失败'
       })
     })
+  }
+
+  onShareAppMessage(e) {
+    return {
+      title: this.state.page?.title || '',
+      path: '/pages/about/index',
+    }
+  }
+
+  onShareTimeline (e) {
+    return {
+      title: this.state.page?.title || '',
+    }
   }
 
   render() {

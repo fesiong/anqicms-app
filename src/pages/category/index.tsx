@@ -28,6 +28,10 @@ export default class CategoryPage extends Component {
   }
 
   componentWillMount() {
+    Taro.showShareMenu({
+      withShareTicket: true,
+      showShareItems: ['shareAppMessage','shareTimeline']
+    });
     let params: any = getCurrentInstance().router?.params;
     this.id = params.id
   }
@@ -129,6 +133,19 @@ export default class CategoryPage extends Component {
     navigate({
       url: '/pages/category/index?id=' + e
     })
+  }
+
+  onShareAppMessage(e) {
+    return {
+      title: this.state.category?.title || '',
+      path: '/pages/category/index?id=' + this.id,
+    }
+  }
+
+  onShareTimeline (e) {
+    return {
+      title: this.state.category?.title || '',
+    }
   }
 
   render() {

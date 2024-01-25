@@ -25,7 +25,12 @@ export default class ArticlesPage extends Component {
     fixed: !1,
   }
 
-  componentWillMount() { }
+  componentWillMount() {
+    Taro.showShareMenu({
+      withShareTicket: true,
+      showShareItems: ['shareAppMessage','shareTimeline']
+    });
+  }
 
   componentDidMount() {
     getCategoryList({
@@ -103,8 +108,19 @@ export default class ArticlesPage extends Component {
 
   gotoArticle = (e) => {
     Taro.navigateTo({
-      url: '/pages/article/index?id=' + e
+      url: '/pages/articles/index?id=' + e
     })
+  }
+
+  onShareAppMessage(e) {
+    return {
+      path: '/pages/articles/index',
+    }
+  }
+
+  onShareTimeline (e) {
+    return {
+    }
   }
 
   render() {

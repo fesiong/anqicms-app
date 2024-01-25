@@ -25,7 +25,12 @@ export default class ProductsPage extends Component {
     fixed: !1,
   }
 
-  componentWillMount() { }
+  componentWillMount() {
+    Taro.showShareMenu({
+      withShareTicket: true,
+      showShareItems: ['shareAppMessage','shareTimeline']
+    });
+  }
 
   componentDidMount() {
     getCategoryList({
@@ -104,6 +109,17 @@ export default class ProductsPage extends Component {
     Taro.navigateTo({
       url: '/pages/product/index?id=' + e
     })
+  }
+
+  onShareAppMessage(e) {
+    return {
+      path: '/pages/products/index',
+    }
+  }
+
+  onShareTimeline (e) {
+    return {
+    }
   }
 
   render() {

@@ -21,6 +21,10 @@ export default class ArticlePage extends Component {
   id = 0
 
   componentWillMount() {
+    Taro.showShareMenu({
+      withShareTicket: true,
+      showShareItems: ['shareAppMessage','shareTimeline']
+    });
     let params: any = getCurrentInstance().router?.params;
     this.id = params.id
   }
@@ -76,6 +80,19 @@ export default class ArticlePage extends Component {
     navigate({
       url: '/pages/article/index?id=' + e
     })
+  }
+
+  onShareAppMessage(e) {
+    return {
+      title: this.state.article?.title || '',
+      path: '/pages/article/index?id=' + this.id,
+    }
+  }
+
+  onShareTimeline (e) {
+    return {
+      title: this.state.article?.title || '',
+    }
   }
 
   render() {

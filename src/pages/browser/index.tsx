@@ -11,6 +11,10 @@ export default class BrowserPage extends Component {
   }
 
   componentWillMount () {
+    Taro.showShareMenu({
+      withShareTicket: true,
+      showShareItems: ['shareAppMessage','shareTimeline']
+    });
     let params: any = getCurrentInstance().router?.params;
     this.setState({
       url: params.url
@@ -26,6 +30,17 @@ export default class BrowserPage extends Component {
 
   loadSuccess(e) {
     console.log(e)
+  }
+
+  onShareAppMessage(e) {
+    return {
+      path: '/pages/browser/index?url=' + this.state.url,
+    }
+  }
+
+  onShareTimeline (e) {
+    return {
+    }
   }
 
   render () {

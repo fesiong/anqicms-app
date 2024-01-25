@@ -25,7 +25,12 @@ export default class CasesPage extends Component {
     fixed: !1,
   }
 
-  componentWillMount() { }
+  componentWillMount() {
+    Taro.showShareMenu({
+      withShareTicket: true,
+      showShareItems: ['shareAppMessage','shareTimeline']
+    });
+  }
 
   componentDidMount() {
     getCategoryList({
@@ -101,10 +106,15 @@ export default class CasesPage extends Component {
     this.getTabArticles(currentId)
   }
 
-  gotoArticle = (e) => {
-    Taro.navigateTo({
-      url: '/pages/article/index?id=' + e
-    })
+  onShareAppMessage(e) {
+    return {
+      path: '/pages/cases/index',
+    }
+  }
+
+  onShareTimeline (e) {
+    return {
+    }
   }
 
   render() {

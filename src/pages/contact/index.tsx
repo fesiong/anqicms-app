@@ -22,6 +22,10 @@ export default class AboutPage extends Component {
   }
 
   componentDidMount () {
+    Taro.showShareMenu({
+      withShareTicket: true,
+      showShareItems: ['shareAppMessage','shareTimeline']
+    });
     getPageDetail({
       filename: "contact",
     }).then(res => {
@@ -101,6 +105,19 @@ export default class AboutPage extends Component {
     this.setState({
       isOpened: false,
     })
+  }
+
+  onShareAppMessage(e) {
+    return {
+      title: this.state.page?.title || '',
+      path: '/pages/contact/index',
+    }
+  }
+
+  onShareTimeline (e) {
+    return {
+      title: this.state.page?.title || '',
+    }
   }
 
   render () {

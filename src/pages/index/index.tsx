@@ -24,6 +24,10 @@ export default class IndexPage extends Component {
   }
 
   componentDidMount() {
+    Taro.showShareMenu({
+      withShareTicket: true,
+      showShareItems: ['shareAppMessage','shareTimeline']
+    });
     // setting
     let setting = getGlobal("setting");
     if (!setting) {
@@ -143,6 +147,19 @@ export default class IndexPage extends Component {
     Taro.navigateTo({
       url: '/pages/category/index?id=' + e
     })
+  }
+
+  onShareAppMessage(e) {
+    return {
+      title: this.state.setting?.SiteName || '',
+      path: '/pages/index/index',
+    }
+  }
+
+  onShareTimeline (e) {
+    return {
+      title: this.state.setting?.SiteName || '',
+    }
   }
 
   render() {
